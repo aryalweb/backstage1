@@ -1,5 +1,16 @@
 # @backstage/plugin-catalog-backend-module-incremental-ingestion
 
+## 0.4.12-next.2
+
+### Patch Changes
+
+- cc4228e: Switched module ID to use kebab-case.
+- Updated dependencies
+  - @backstage/plugin-catalog-backend@1.15.1-next.2
+  - @backstage/backend-common@0.20.0-next.1
+  - @backstage/backend-tasks@0.5.13-next.1
+  - @backstage/plugin-catalog-node@1.5.1-next.1
+
 ## 0.4.12-next.1
 
 ### Patch Changes

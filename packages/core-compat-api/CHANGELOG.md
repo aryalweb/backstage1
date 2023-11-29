@@ -1,5 +1,14 @@
 # @backstage/core-compat-api
 
+## 0.0.1-next.2
+
+### Patch Changes
+
+- 8f5d6c1: Updates to match the new extension input wrapping.
+- 046e443: Updates for compatibility with the new extension IDs.
+- Updated dependencies
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+
 ## 0.0.1-next.1
 
 ### Patch Changes

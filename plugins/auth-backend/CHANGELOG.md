@@ -1,5 +1,23 @@
 # @backstage/plugin-auth-backend
 
+## 0.20.1-next.2
+
+### Patch Changes
+
+- 783797a: fix static token issuer not being able to initialize
+- Updated dependencies
+  - @backstage/plugin-auth-backend-module-oauth2-proxy-provider@0.1.0-next.1
+  - @backstage/plugin-auth-backend-module-gcp-iap-provider@0.2.2-next.2
+  - @backstage/plugin-auth-backend-module-google-provider@0.1.5-next.2
+  - @backstage/plugin-auth-backend-module-atlassian-provider@0.1.0-next.1
+  - @backstage/plugin-auth-backend-module-github-provider@0.1.5-next.1
+  - @backstage/plugin-auth-backend-module-gitlab-provider@0.1.5-next.1
+  - @backstage/plugin-auth-backend-module-oauth2-provider@0.1.5-next.1
+  - @backstage/plugin-auth-backend-module-okta-provider@0.0.1-next.1
+  - @backstage/backend-common@0.20.0-next.1
+  - @backstage/plugin-auth-node@0.4.2-next.1
+  - @backstage/plugin-catalog-node@1.5.1-next.1
+
 ## 0.20.1-next.1
 
 ### Patch Changes

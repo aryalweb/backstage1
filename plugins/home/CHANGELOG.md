@@ -1,5 +1,16 @@
 # @backstage/plugin-home
 
+## 0.6.0-next.2
+
+### Patch Changes
+
+- 8f5d6c1: Updates to the `/alpha` exports to match the extension input wrapping change.
+- 36c94b8: Refactor of the alpha exports due to API change in how extension IDs are constructed.
+- Updated dependencies
+  - @backstage/plugin-catalog-react@1.9.2-next.2
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+  - @backstage/plugin-home-react@0.1.6-next.1
+
 ## 0.6.0-next.1
 
 ### Minor Changes

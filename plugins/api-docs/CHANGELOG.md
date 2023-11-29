@@ -1,5 +1,13 @@
 # @backstage/plugin-api-docs
 
+## 0.10.2-next.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @backstage/plugin-catalog-react@1.9.2-next.2
+  - @backstage/plugin-catalog@1.16.0-next.3
+
 ## 0.10.2-next.2
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @backstage/plugin-catalog-import
 
+## 0.10.4-next.3
+
+### Patch Changes
+
+- 36c94b8: Refactor of the alpha exports due to API change in how extension IDs are constructed.
+- Updated dependencies
+  - @backstage/core-compat-api@0.0.1-next.2
+  - @backstage/plugin-catalog-react@1.9.2-next.2
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+  - @backstage/integration-react@1.1.22-next.1
+
 ## 0.10.4-next.2
 
 ### Patch Changes

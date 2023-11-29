@@ -1,5 +1,14 @@
 # @backstage/frontend-app-api
 
+## 0.4.0-next.2
+
+### Patch Changes
+
+- 8f5d6c1: Updates to match the new extension input wrapping.
+- 8837a96: Updates to match the introduction of `ExtensionDefinition` and new extension ID naming patterns.
+- Updated dependencies
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+
 ## 0.4.0-next.1
 
 ### Minor Changes

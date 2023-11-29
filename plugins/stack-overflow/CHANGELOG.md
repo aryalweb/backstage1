@@ -1,5 +1,15 @@
 # @backstage/plugin-stack-overflow
 
+## 0.1.23-next.2
+
+### Patch Changes
+
+- 36c94b8: Refactor of the alpha exports due to API change in how extension IDs are constructed.
+- Updated dependencies
+  - @backstage/plugin-search-react@1.7.4-next.2
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+  - @backstage/plugin-home-react@0.1.6-next.1
+
 ## 0.1.23-next.1
 
 ### Patch Changes

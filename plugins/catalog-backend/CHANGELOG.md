@@ -1,5 +1,18 @@
 # @backstage/plugin-catalog-backend
 
+## 1.15.1-next.2
+
+### Patch Changes
+
+- 50ee804: Wrap single `pipelineLoop` of TaskPipeline in a span for better traces
+- Updated dependencies
+  - @backstage/plugin-search-backend-module-catalog@0.1.12-next.2
+  - @backstage/backend-common@0.20.0-next.1
+  - @backstage/backend-tasks@0.5.13-next.1
+  - @backstage/plugin-auth-node@0.4.2-next.1
+  - @backstage/plugin-catalog-node@1.5.1-next.1
+  - @backstage/plugin-permission-node@0.7.19-next.1
+
 ## 1.15.1-next.1
 
 ### Patch Changes

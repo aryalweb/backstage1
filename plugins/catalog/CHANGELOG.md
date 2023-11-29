@@ -1,5 +1,18 @@
 # @backstage/plugin-catalog
 
+## 1.16.0-next.3
+
+### Patch Changes
+
+- 8f5d6c1: Updates to the `/alpha` exports to match the extension input wrapping change.
+- 36c94b8: Refactor of the alpha exports due to API change in how extension IDs are constructed.
+- Updated dependencies
+  - @backstage/core-compat-api@0.0.1-next.2
+  - @backstage/plugin-catalog-react@1.9.2-next.2
+  - @backstage/plugin-search-react@1.7.4-next.2
+  - @backstage/frontend-plugin-api@0.4.0-next.2
+  - @backstage/integration-react@1.1.22-next.1
+
 ## 1.16.0-next.2
 
 ### Minor Changes
