@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-import React, { ReactNode } from 'react';
 import {
-  createApiExtension,
-  createPageExtension,
-  createPlugin,
-  BackstagePlugin,
-  ExtensionDefinition,
-} from '@backstage/frontend-plugin-api';
-import { Route, Routes } from 'react-router-dom';
-import {
+  AnyRouteRefParams,
   BackstagePlugin as LegacyBackstagePlugin,
   RouteRef,
   getComponentData,
 } from '@backstage/core-plugin-api';
+import {
+  BackstagePlugin,
+  ExtensionDefinition,
+  coreExtensionData,
+  createApiExtension,
+  createExtension,
+  createExtensionInput,
+  createPageExtension,
+  createPlugin,
+} from '@backstage/frontend-plugin-api';
+import React, { Children, Fragment, ReactNode, isValidElement } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { convertLegacyRouteRef } from './convertLegacyRouteRef';
 
 /*
@@ -58,6 +62,69 @@ Existing tasks:
 
 */
 
+function visitRouteChildren(
+  rootNode: ReactNode,
+  parentName: string | undefined,
+  createdPluginIds: Map<LegacyBackstagePlugin, ExtensionDefinition<unknown>[]>,
+): ExtensionDefinition<unknown>[] {
+  return Children.toArray(rootNode).flatMap((node, index) => {
+    if (!isValidElement(node)) {
+      return [];
+    }
+
+    const name = `${parentName}.${index}`;
+
+    if (node.type === Fragment) {
+      return visitRouteChildren(node.props.children, name, createdPluginIds);
+    }
+
+    const plugin = getComponentData<LegacyBackstagePlugin>(node, 'core.plugin');
+    if (plugin) {
+      if (!createdPluginIds.has(plugin)) {
+        createdPluginIds.set(plugin, []);
+      }
+    }
+
+    const routeRef = getComponentData<RouteRef<AnyRouteRefParams>>(
+      node,
+      'core.mountPoint',
+    );
+    const routePath: string | undefined = node.props.path;
+
+    if (!routeRef && !routePath) {
+      return visitRouteChildren(node.props.children, name, createdPluginIds);
+    }
+
+    const extension = createExtension({
+      kind: 'routing-shim',
+      name,
+      attachTo: { id: `routing-shim:${parentName}`, input: 'children' },
+      inputs: {
+        children: createExtensionInput({
+          routePath: coreExtensionData.routePath.optional(),
+          routeRef: coreExtensionData.routeRef.optional(),
+        }),
+      },
+      output: {
+        routePath: coreExtensionData.routePath.optional(),
+        routeRef: coreExtensionData.routeRef.optional(),
+      },
+      factory: () => ({
+        routePath,
+        routeRef: routeRef ? convertLegacyRouteRef(routeRef) : undefined,
+      }),
+    });
+
+    const children = visitRouteChildren(
+      node.props.children,
+      name,
+      createdPluginIds,
+    );
+
+    return [extension, ...children];
+  });
+}
+
 /** @public */
 export function collectLegacyRoutes(
   flatRoutesElement: JSX.Element,
@@ -81,7 +148,6 @@ export function collectLegacyRoutes(
 
       const routeElement = route.props.element;
 
-      // TODO: to support deeper extension component, e.g. hidden within <RequirePermission>, use https://github.com/backstage/backstage/blob/518a34646b79ec2028cc0ed6bc67d4366c51c4d6/packages/core-app-api/src/routing/collectors.tsx#L69
       const plugin = getComponentData<LegacyBackstagePlugin>(
         routeElement,
         'core.plugin',
@@ -102,11 +168,19 @@ export function collectLegacyRoutes(
 
       const path: string = route.props.path;
 
+      const name = detectedExtensions.length
+        ? String(detectedExtensions.length + 1)
+        : undefined;
+
+      const childExtensions = visitRouteChildren(
+        route.props.children,
+        name ?? '0',
+        createdPluginIds,
+      );
+
       detectedExtensions.push(
         createPageExtension({
-          name: detectedExtensions.length
-            ? String(detectedExtensions.length + 1)
-            : undefined,
+          name,
           defaultPath: path[0] === '/' ? path.slice(1) : path,
           routeRef: routeRef ? convertLegacyRouteRef(routeRef) : undefined,
 
@@ -121,6 +195,7 @@ export function collectLegacyRoutes(
               routeElement
             ),
         }),
+        ...childExtensions,
       );
     },
   );
